@@ -1,4 +1,5 @@
 const Header = (props) => {
+  // console.log(props)
   return (
     <h1>
       {props.course}
@@ -9,9 +10,9 @@ const Header = (props) => {
 const Content = (props) => {
   return (
     <>
-      <Parts part={props.part} exercise={props.exercise}></Parts>
-      <Parts part={props.part2} exercise={props.exercise2}></Parts>
-      <Parts part={props.part3} exercise={props.exercise3}></Parts>
+      <Parts part={props.parts[0].name} exercise={props.parts[0].exercises}></Parts>
+      <Parts part={props.parts[1].name} exercise={props.parts[1].exercises}></Parts>
+      <Parts part={props.parts[2].name} exercise={props.parts[2].exercises}></Parts>
     </>
   )
 }
@@ -26,7 +27,9 @@ const Parts = (props) => {
 
 const Total = (props) => {
 
-  let total = props.exercise1 + props.exercise2 + props.exercise3
+  let total = props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises
+
+  // console.log(props.parts[0].name)
 
   return (
     <p>
@@ -39,28 +42,26 @@ const Total = (props) => {
 const App = () => {
   const course = 'Desenvolvimento de aplicação Half Stack'
 
-  const part1 = {
-    name: 'Fundamentos da biblioteca React',
-    exercise: 10
-  }
-  const part2 = {
-    name:'Usando props para passar dados',
-    exercise: 7
-  }
-  const part3 = {
-    name: 'Estado de um componente',
-    exercise: 14
-  }
+  const parts = [
+    {
+      name: 'Fundamentos da biblioteca React',
+      exercises: 10
+    },
+    {
+      name: 'Usando props para passar dados',
+      exercises: 7
+    },
+    {
+      name: 'Estado de um componente',
+      exercises: 14
+    }
+  ]
+
   return (
     <div>
       <Header course={course}></Header>
-      <Content
-        part={part1.name} exercise={part1.exercise}
-        part2={part2.name} exercise2={part2.exercise}
-        part3={part3.name} exercise3={part3.exercise}
-      ></Content>
-
-      <Total exercise1={part1.exercise} exercise2={part2.exercise} exercise3={part3.exercise}></Total>
+      <Content parts={parts}></Content>
+      <Total parts={parts}></Total>
     </div>
   )
 }
